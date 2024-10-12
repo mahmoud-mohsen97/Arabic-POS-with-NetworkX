@@ -1,34 +1,39 @@
-# Arabic-POS-with-NetworkX
+# Arabic POS Tagging with NetworkX
 
-## Introduction:
-In this project, the goal is to build a pipeline for part-of-speech tagging and then represent the POS by network graphs for the Arabic language. Part-of-speech tagging is the process of assigning a grammatical category (such as noun, verb, adjective, etc.) to each word in a given text. We will represent the text as a network graph to visualize and analyze the relationships between words based on their parts of speech. 
-## Data Description:
-- I used in LSTM training Arabic PUD github Taken from Universal Dependencies
-- Uses articles from Wikipedia(W) and the news(N)
-- Data is sequential (sequence of words) therefore using a sequence-labeling model is preferred
-- It contains 998 sentences and 16 Tags 
-## Experiments:
-- Approach 1:  Stanza – A Python NLP Package for Many Human Languages
-  
-  Stanza is a collection of accurate and efficient tools for the linguistic analysis of many human languages. Starting from raw text to syntactic     analysis and entity recognition, Stanza brings state-of-the-art NLP models to languages of your choosing.
-  So I used it where it prepared library and that will give me a fast output but there was some wrong prediction and that lead me to search for a     more robust approach
+This project demonstrates Part-of-Speech (POS) tagging for Arabic text and visualizes the results using NetworkX graphs. The goal is to build a pipeline that performs POS tagging on Arabic text and represents the grammatical relationships between words in a network graph. This pipeline leverages both rule-based and deep learning approaches to improve accuracy.
 
-- Approach 2: Bi-directional LSTM model (Bi-LSTM)
-  
-  Through searching I found the stat-of-art for this task is Meta BiLSTM (Bohnet et al., 2018) with an accuracy of 97.96 so I built a Bidirectional   LSTM which is a sequential labeling classifier and will get the sequential information into consideration 
-## Results: 
-By evaluating the two models on the PUD Dataset I get : 
-- Stanza Accuracy: 41.55%
-- Bidirectional LSTM  Loss: 0.1901 and an Accuracy: 0.9424 
-## Conclusion:
-Using the Stanza library was so fast and optimized but the Bidirectional LSTM was accurate and building the Network is very relative and depending on the case and what information and insights you want to get.
-## Tools and Resources:
-- Overview - Stanza (stanfordnlp.github.io)
-- Usefull tutorial with github page for reading and parsing dataset
-- Medium article for Processing input data
-- The aravec for the word embedding 
-- NetworkX for creating a network graph of the POS tags
-- Matplotlib, arabic-reshaper, and python-bidi for visualizing the network graph
-- Keras and sklearn for building and evaluating the model 
-## Challenges Faced and Learning from the Project:
-The biggest challenge in this project might be dealing with the complexity of the Arabic language and the lack of readily available datasets and tools for Arabic NLP tasks. From this project, one can learn how to use various Python libraries for NLP tasks and how process and use wording embedding for Arabic,The project also demonstrates how to visualize the resulting data using NetworkX and matplotlib especially for Arabic.
+## Approach 1: Rule-Based and Deep Learning POS Tagging
+
+1. Rule-Based Methods (spaCy and Stanza)
+- spaCy-UDPipe: Implements rule-based POS tagging using pre-trained models, but struggles with mixed-language texts.
+- Stanza: Provides improved accuracy for Arabic text, though it faces challenges with English names in mixed texts.
+2. Deep Learning Method (Bi-LSTM and Transformers)
+- Bi-LSTM: A sequence-labeling model that captures contextual information for improved POS tagging accuracy.
+- Transformers (CAMeL-BERT): Fine-tuned BERT model for Modern Standard Arabic (MSA), offering superior accuracy, especially in handling mixed-language texts.
+
+## Network Graph Construction
+NetworkX is used to build a network graph where:
+
+- Nodes represent words and their corresponding POS tags.
+- Edges depict sequential and syntactic relationships between words.
+
+This visualization helps in understanding the structure of Arabic sentences and their grammatical dependencies.
+
+## Dataset
+The project uses two datasets:
+
+1. Arabic PUD (Universal Dependencies): Contains 998 sentences and 16 POS tags.
+2. Arabic Article (CyShield): A single article in Arabic, containing mixed-language text (Arabic and English names).
+
+## Results
+- Rule-Based (spaCy/Stanza): Provides fast tagging but struggles with mixed-language content.
+- Bi-LSTM: Achieves 94.24% accuracy, showing robust performance in handling sequential Arabic text.
+- Transformer-Based (CAMeL-BERT): Delivers superior accuracy, solving tokenization and classification issues with mixed-language content.
+
+## Tools and Resources
+- POS Tagging: spaCy, Stanza, Hugging Face Transformers.
+- Visualization: NetworkX, Matplotlib, Arabic-reshaper, and python-bidi for correct display of Arabic text in graphs.
+- Modeling: Keras, TensorFlow for Bi-LSTM, and CAMeL-BERT for transformer-based approaches.
+
+## Conclusion
+Deep learning-based models, especially transformers like BERT, significantly outperform rule-based methods in POS tagging for Arabic, particularly with mixed-language texts. The use of NetworkX provides an effective visual representation of grammatical structures and word relationships.
